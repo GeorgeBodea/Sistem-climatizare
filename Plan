@@ -1,5 +1,4 @@
 Sistem de climatizare 
-Aplicatie back-end care iti spune ca ai iesti din zona. 
 
 Scopul aplicatiei: Vrem sa implementam functionalitatea unui sistem de climatizare smart. Vrem ca aparatul nostru sa poata pastra temperatura constanta intr-o camera in functie de diferiti parametrii pe care sa-i ia in considerare la un anumit interval de timp, cum ar fi: numarul de persoane din camera, volumul camerei si temperatura din exterior.
 
