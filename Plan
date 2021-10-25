@@ -1,0 +1,31 @@
+Sistem de climatizare 
+Aplicatie back-end care iti spune ca ai iesti din zona. 
+
+Scopul aplicatiei: Vrem sa implementam functionalitatea unui sistem de climatizare smart. Vrem ca aparatul nostru sa poata pastra temperatura constanta intr-o camera in functie de diferiti parametrii pe care sa-i ia in considerare la un anumit interval de timp, cum ar fi: numarul de persoane din camera, volumul camerei si temperatura din exterior.
+
+Obiectivele aplicatiei:
+As vrea ca sistemul sa circule aer de o anumita temperatura in camera pentru a asigura climatizarea dorita.
+As vrea ca sistemul sa ia in considerare dimensiunea camerei in care se afla.
+As vrea ca sistemul sa ia in considerare numarul de persoane dintr-o camera.
+As vrea ca un utilizator obisnuit sa poata pune aparatul pe optiunea “Default” care tine temperatura camerei constant la 20 C.
+As vrea ca un utilizator obisnuit sa poata pune o temperatura “Custom” in aparat.
+As vrea ca un utilizator mai avansat (spre exemplu o asistenta medicala) sa poata seta aparatul pentru cazuri mai particulare, in functie de ce pacienti are (pacienti cu febra sau cu diferite afectiuni/ tensiune).
+
+
+Grupul tinta:
+Clientii care au camere mari/ de interes profesional (sali de conferinta, sali de spitale, sali de sauna)
+
+Colectarea cerintelor:
+Implementam 2 senzori care ne spun daca o persoana (un om) intra sau iese din camera
+Implementam 1 termometru in camera care ne spune temperatura in camera
+Implementam o interfata cu care utilizatorul pune setarile (Custom)
+Implemetam un software care pune in circulatie aer
+
+Interpretarea si prioritizarea cerintelor:
+Implemetam un software care pune in circulatie aer
+Implementam o interfata cu care utilizatorul pune setarile (Custom)
+Implementam 1 termometru in camera care ne spune temperatura in camera
+Implementam 2 senzori care ne spun daca o persoana (un om) intra sau iese din camera
+
+
+Motivatie: Inca nu am caldura in casa
