@@ -18,5 +18,4 @@ subscriber.on_message = fnc_activa
 
 
 time.sleep(30)
-subscriber.loop_end()
 
