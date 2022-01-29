@@ -3,7 +3,7 @@ import sys
 from random import randrange
 import time
 
-broker = "mqtt.eclipseprojects.io"
+broker = "localhost"
 publisher = client_lib.Client("SenzorInterior")
 publisher.connect(broker)
 

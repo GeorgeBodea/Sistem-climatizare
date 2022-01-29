@@ -5,7 +5,7 @@ broker = "localhost"
 subscriber =  client_lib.Client("Display")
 
 def fnc_activa(client, user_data, message):
-  print("Mesaj primit: ", str(message.payload.decode("utf-8")), str(client))
+  print("Temperatura primita: ", str(message.payload.decode("utf-8")))
 
 
 

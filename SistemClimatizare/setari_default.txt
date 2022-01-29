@@ -1,4 +1,0 @@
-NumeBazaDeDateFirebase: Inexistenta
-NumarPersoane: 1
-Temperatura: 20.0
-Timp: 2021-20-12
