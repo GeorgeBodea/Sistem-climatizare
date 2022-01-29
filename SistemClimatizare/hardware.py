@@ -1,18 +1,20 @@
 import paho.mqtt.client as client_lib
-from intializare_setari import default_app
+# from intializare_setari import default_app
 from firebase_admin import db
 import time
 
 
-broker = "mqtt.eclipseprojects.io"
+broker = "localhost"
 subscriber = client_lib.Client("Hardware")
 subscriber.connect(broker)
-subscriber.subscribe("Temperatura")
 
 
-root = db.reference()
-fisier_initilizare = root.child('FisierInitializare').get()
-Temperatura_Dorita = float(fisier_initilizare["Temperatura"])
+# root = db.reference()
+# 
+# fisier_initilizare = root.child('FisierInitializare').get()
+# Temperatura_Dorita = float(fisier_initilizare["Temperatura"])
+
+Temperatura_Dorita = 15.0
 
 def fct_test(client, user_data, message):
   print('Ceva')
@@ -33,11 +35,12 @@ def fnc_activa(client, user_data, message):
     print("Mentinem temepratura")
 
 
+
 while True:
   subscriber.loop_start()
-  time.sleep(1)
 
+  subscriber.subscribe("Temperatura")
   subscriber.on_message = fnc_activa
 
-  time.sleep(1)
+  time.sleep(2)
   subscriber.loop_stop()
