@@ -1,34 +1,36 @@
 import pathlib
-import shutil
-import os
-from variables import path_setari_custom, path_setari_ram, path_setari_utilizatori_abs
+from variables import path_setari_custom_abs, path_setari_ram_abs
 
 
 
 initial_count = 0
-for path in pathlib.Path(path_setari_custom).iterdir():
+for path in pathlib.Path(path_setari_custom_abs).iterdir():
     if path.is_file():
         initial_count += 1
 
-print(initial_count)
 
 
-nume_setare_aleasa = ""
+def suprascriere_fisier_ram(nume_setare):
+  nume_fisier_setare = nume_setare + ".txt"
+  data = ""
+  
+  with open(path_setari_custom_abs + "/" + nume_fisier_setare, "r") as fisier_setare:
+    data = fisier_setare.read()
 
-if (initial_count != 1):
+  with open(path_setari_ram_abs + '/fisier_ram.txt', "w") as myfile:
+    myfile.write(data)
+
+
+
+
+if (initial_count == 1):
+  suprascriere_fisier_ram("setari_default")
+else:
   while (True):
-    print("Alegeti setarea: ")
-
-    nume_setare_aleasa = input() + ".txt"
+    nume_setare_aleasa = input("Alegeti setarea: ")
 
     try:
-      data = ""
-      with open(path_setari_custom + "/" + nume_setare_aleasa, "r") as fisier_setare:
-        data = fisier_setare.read()
-
-      with open(path_setari_ram + '/fisier_ram.txt', "w") as myfile:
-        myfile.write(data)
-      
+      suprascriere_fisier_ram(nume_setare_aleasa)
       break
     except: 
       print("Setarea aceasta nu exista! Incercati din nou")
