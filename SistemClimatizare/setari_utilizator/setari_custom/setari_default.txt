@@ -1,4 +1,0 @@
-Nume_Setare: Default
-Numar_Persoane: 1
-Temperatura: 20.0
-Data_Creare: 2022-20-1 23:59:59

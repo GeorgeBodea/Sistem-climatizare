@@ -1,21 +1,21 @@
 import paho.mqtt.client as client_lib
 import time
 
-broker = "localhost"
-subscriber = client_lib.Client("Display")
-
 
 def fnc_activa(client, user_data, message):
     print("Temperatura primita: ", str(message.payload.decode("utf-8")))
 
 
-subscriber.connect(broker)
+if __name__ == "__main__":
+    broker = "localhost"
+    subscriber = client_lib.Client("Display")
+    subscriber.connect(broker)
 
-while True:
-    subscriber.loop_start()
+    while True:
+        subscriber.loop_start()
 
-    subscriber.subscribe("Temperatura")
-    subscriber.on_message = fnc_activa
+        subscriber.subscribe("Temperatura")
+        subscriber.on_message = fnc_activa
 
-    time.sleep(2)
-    subscriber.loop_stop()
+        time.sleep(2)
+        subscriber.loop_stop()

@@ -2,6 +2,7 @@ from basicSensor import BasicSensor
 import paho.mqtt.client as mqtt_client
 import threading
 import time
+import parsare_setari_senzori
 
 
 class HumanSensor:
@@ -22,6 +23,7 @@ class HumanSensor:
         self.subscriber_ext = mqtt_client.Client(self.sensor_ext.sensor_name)
         self.subscriber_ext.connect(self.broker)
         self.sensor_times = dict()
+        self.setari = parsare_setari_senzori.parsare_citire()
 
     def loop_monitor(self):
         def monitor_aux(client, user_data, message):
@@ -34,10 +36,18 @@ class HumanSensor:
                 time_sensor_int = self.sensor_times[self.subscriber_int]
                 time_sensor_ext = self.sensor_times[self.subscriber_ext]
                 if abs(time_sensor_int - time_sensor_ext) < 3.0:
+                    co_persoane = self.setari["Numar_Persoane"]
                     if time_sensor_int < time_sensor_ext:
-                        print("Un om a iesit")
+                        if co_persoane > 0:
+                            print("Un om a iesit")
+                            co_persoane -= 1
+                            self.setari["Numar_Persoane"] = co_persoane
+                            parsare_setari_senzori.scriere_setare(self.setari)
                     elif time_sensor_ext < time_sensor_int:
                         print("Un om a intrat")
+                        co_persoane += 1
+                        self.setari["Numar_Persoane"] = co_persoane
+                        parsare_setari_senzori.scriere_setare(self.setari)
 
         while True:
             self.subscriber_int.loop_start()
