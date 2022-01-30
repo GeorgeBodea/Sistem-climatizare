@@ -1,4 +1,4 @@
-Nume_Setare: bxcv
-Numar_Persoane: 31
-Temperatura: 32.0
-Data_Creare: 2022-01-29 22:57:01
+Nume_Setare: Default
+Numar_Persoane: 1
+Temperatura: 20.0
+Data_Creare: 2022-20-1 23:59:59
