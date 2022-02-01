@@ -11,6 +11,10 @@ import alegere_setare
 import stergere_setare
 import variables
 
+from sistem_climatizare.firebase_backup.firebase_api import download_all_settings as download_all_settings
+
+from sistem_climatizare.firebase_backup.firebase_api import upload_all_settings as upload_all_settings
+
 PORT = 8088
 
 path_setari_custom_abs = variables.path_setari_custom_abs
@@ -122,6 +126,44 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 output += '</body></html>'
 
                 self.wfile.write(bytes(output, "utf-8"))
+            if path_web_entry == "backup_upload":
+                                    self.send_response(200)
+                                    self.send_header("Content-type", "text/html")
+                                    self.end_headers()
+
+                                    output = ""
+                                    output += '<html><body>'
+                                    output += '<h1> Autentificati-va pentru a face upload la backup </h1>'
+
+                                    output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_upload">'
+
+                                    output += '<input name="email" type="text" placeholder="Email"><br><br>'
+                                    output += '<input name="password" type="text" placeholder="Password"><br><br>'
+
+                                    output += '<input type="submit" value="Submit">'
+                                    output += '</form>'
+                                    output += '</body></html>'
+
+                                    self.wfile.write(bytes(output, "utf-8"))
+            if path_web_entry == "backup_download":
+                                    self.send_response(200)
+                                    self.send_header("Content-type", "text/html")
+                                    self.end_headers()
+
+                                    output = ""
+                                    output += '<html><body>'
+                                    output += '<h1> Autentificati-va pentru a face download la backup </h1>'
+
+                                    output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_download">'
+
+                                    output += '<input name="email" type="text" placeholder="Email"><br><br>'
+                                    output += '<input name="password" type="text" placeholder="Password"><br><br>'
+
+                                    output += '<input type="submit" value="Submit">'
+                                    output += '</form>'
+                                    output += '</body></html>'
+
+                                    self.wfile.write(bytes(output, "utf-8"))
 
         if len(path_web) == 3:
             path_web_entry = path_web[1]
@@ -224,6 +266,60 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.send_header("Content-type", "text/html")
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
+        elif self.path.endswith('/backup_download'):
+            length = int(self.headers.get('content-length'))
+            message = self.rfile.read(length)
+            message = message.decode("utf-8")
+            message = message.split('&')
+
+            dictionar_setari = dict()
+            for element in message:
+                cheie, valoare = element.split('=')
+                dictionar_setari[cheie] = urllib.parse.unquote(valoare)
+
+            print(str(dictionar_setari))
+
+            try:
+                # alegere_setare.alegere_setare_fct(dictionar_setari["nume_setare"])
+                download_all_settings(dictionar_setari["email"], dictionar_setari["password"]) # aici apelam functia dintr-un script de background_download.py
+            except Exception as e:
+                print(e)
+                self.send_response(400)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                return
+            else:
+                self.send_response(301)
+                self.send_header("Content-type", "text/html")
+                self.send_header("Location", "/fisiere_custom")
+                self.end_headers()
+        elif self.path.endswith('/backup_upload'):
+            length = int(self.headers.get('content-length'))
+            message = self.rfile.read(length)
+            message = message.decode("utf-8")
+            message = message.split('&')
+
+            dictionar_setari = dict()
+            for element in message:
+                cheie, valoare = element.split('=')
+                dictionar_setari[cheie] = urllib.parse.unquote(valoare)
+
+            print(str(dictionar_setari))
+
+            try:
+                upload_all_settings(dictionar_setari["email"], dictionar_setari["password"])
+            except Exception as e:
+                print(e)
+                self.send_response(400)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
+                return
+            else:
+                self.send_response(301)
+                self.send_header("Content-type", "text/html")
+                self.send_header("Location", "/fisiere_custom")
+                self.end_headers()
+            
 
 
 httpd = HTTPServer(("", PORT), NucleumHTTP)
