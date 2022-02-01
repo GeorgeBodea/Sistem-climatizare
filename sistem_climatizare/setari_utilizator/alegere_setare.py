@@ -13,19 +13,27 @@ def suprascriere_fisier_ram(nume_setare, data=None):
         myfile.write(data)
 
 
-if __name__ == "__main__":
-    initial_count = 0
+def nr_fisiere():
+    count = 0
     for path in pathlib.Path(path_setari_custom_abs).iterdir():
         if path.is_file():
-            initial_count += 1
-    if initial_count == 1:
-        suprascriere_fisier_ram("setari_default")
-    else:
-        while True:
-            nume_setare_aleasa = input("Alegeti setarea: ")
+            count += 1
+    return count
 
-            try:
+
+if __name__ == "__main__":
+    while True:
+        try:
+            initial_count = nr_fisiere()
+            print("Exista {} fisiere".format(initial_count))
+            if initial_count == 1:
+                suprascriere_fisier_ram("setari_default")
+                print("Se utilizeaza setarile default")
+            else:
+                nume_setare_aleasa = input("Alegeti setarea: ")
                 suprascriere_fisier_ram(nume_setare_aleasa)
-                break
-            except:
-                print("Setarea aceasta nu exista! Incercati din nou")
+        except Exception as e:
+            print(e)
+        else:
+            print("Succes!")
+            break

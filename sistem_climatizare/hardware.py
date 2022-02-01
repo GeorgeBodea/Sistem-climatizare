@@ -25,11 +25,14 @@ if __name__ == "__main__":
 
     Temperatura_Dorita = 15.0
 
-    while True:
-        subscriber.loop_start()
+    try:
+        while True:
+            subscriber.loop_start()
 
-        subscriber.subscribe("Temperatura")
-        subscriber.on_message = fnc_activa
+            subscriber.subscribe("Temperatura")
+            subscriber.on_message = fnc_activa
 
-        time.sleep(2)
-        subscriber.loop_stop()
+            time.sleep(2)
+            subscriber.loop_stop()
+    except KeyboardInterrupt:
+        print("Good Bye!")
