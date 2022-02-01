@@ -1,5 +1,6 @@
 import pytest
 
+
 # @pytest.fixture
 def pytest_addoption(parser):
     parser.addoption("--nume_setare", action="store", default="default name")
@@ -15,7 +16,7 @@ def pytest_generate_tests(metafunc):
     option_value2 = metafunc.config.option.temperatura
     option_value3 = metafunc.config.option.numar_persoane
     option_value4 = metafunc.config.option.setare_aleasa
-    
+
     if 'nume_setare' in metafunc.fixturenames and option_value1 is not None:
         metafunc.parametrize("nume_setare", [option_value1])
 

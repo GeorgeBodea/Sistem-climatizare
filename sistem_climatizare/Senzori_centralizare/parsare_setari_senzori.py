@@ -1,9 +1,6 @@
 import __init__
 import json
-import sys
-
-sys.path.append("../setari_utilizator")
-import variables
+import sistem_climatizare.setari_utilizator.variables as variables
 
 
 def parsare_citire(path_fisier=variables.path_setari_ram_abs + variables.nume_fisier_ram):

@@ -1,17 +1,10 @@
 import __init__
-import json
 import os
-import sys
-
-sys.path.append("../firebase_backup")
-import firebase_api
-
-from variables import path_setari_custom_abs
-
+from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs
 
 
 def stergere_setare_fct(nume_setare_custom):
-    path_setare = path_setari_custom_abs + "/" + nume_setare_custom
+    path_setare = path_setari_custom_abs + nume_setare_custom
     nume_fisier_setare = path_setare + ".json"
 
     if os.path.exists(nume_fisier_setare):

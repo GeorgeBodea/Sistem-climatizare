@@ -2,14 +2,11 @@ import __init__
 import cgi
 import json
 import urllib.parse
-import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
-
-sys.path.append("../setari_utilizator")
-import adauga_setare
-import alegere_setare
-import stergere_setare
-import variables
+import sistem_climatizare.setari_utilizator.adauga_setare as adauga_setare
+import sistem_climatizare.setari_utilizator.alegere_setare as alegere_setare
+import sistem_climatizare.setari_utilizator.stergere_setare as stergere_setare
+import sistem_climatizare.setari_utilizator.variables as variables
 
 from sistem_climatizare.firebase_backup.firebase_api import download_all_settings as download_all_settings
 
@@ -21,7 +18,7 @@ path_setari_custom_abs = variables.path_setari_custom_abs
 
 
 def extrage_fisier(nume_fisier):
-    with open(path_setari_custom_abs + "/" + nume_fisier + ".json", "r") as fisier_setare:
+    with open(path_setari_custom_abs + nume_fisier + ".json", "r") as fisier_setare:
         setare = json.loads(fisier_setare.read())
         return setare
 
@@ -36,7 +33,7 @@ def parsare_informatii_fisier(continut):
 
 
 def parsare_informatii_setari(continut):
-    return "<html><body><h1> Informatii setari </h1><p>" + str(continut).replace(',', ';</p>\n<p>')[1:-1] + "</p></body></html>"
+    return "<html><body><h1> Setari disponibile </h1><p>" + str(continut).replace(',', ';</p>\n<p>')[1:-1] + "</p></body></html>"
 
 
 def not_found():
@@ -126,43 +123,43 @@ class NucleumHTTP(BaseHTTPRequestHandler):
 
                 self.wfile.write(bytes(output, "utf-8"))
             if path_web_entry == "backup_upload":
-                                    self.send_response(200)
-                                    self.send_header("Content-type", "text/html")
-                                    self.end_headers()
+                self.send_response(200)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
 
-                                    output = ""
-                                    output += '<html><body>'
-                                    output += '<h1> Autentificati-va pentru a face upload la backup </h1>'
+                output = ""
+                output += '<html><body>'
+                output += '<h1> Autentificati-va pentru a face upload la backup </h1>'
 
-                                    output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_upload">'
+                output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_upload">'
 
-                                    output += '<input name="email" type="text" placeholder="Email"><br><br>'
-                                    output += '<input name="password" type="text" placeholder="Password"><br><br>'
+                output += '<input name="email" type="text" placeholder="Email"><br><br>'
+                output += '<input name="password" type="text" placeholder="Password"><br><br>'
 
-                                    output += '<input type="submit" value="Submit">'
-                                    output += '</form>'
-                                    output += '</body></html>'
+                output += '<input type="submit" value="Submit">'
+                output += '</form>'
+                output += '</body></html>'
 
-                                    self.wfile.write(bytes(output, "utf-8"))
+                self.wfile.write(bytes(output, "utf-8"))
             if path_web_entry == "backup_download":
-                                    self.send_response(200)
-                                    self.send_header("Content-type", "text/html")
-                                    self.end_headers()
+                self.send_response(200)
+                self.send_header("Content-type", "text/html")
+                self.end_headers()
 
-                                    output = ""
-                                    output += '<html><body>'
-                                    output += '<h1> Autentificati-va pentru a face download la backup </h1>'
+                output = ""
+                output += '<html><body>'
+                output += '<h1> Autentificati-va pentru a face download la backup </h1>'
 
-                                    output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_download">'
+                output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_download">'
 
-                                    output += '<input name="email" type="text" placeholder="Email"><br><br>'
-                                    output += '<input name="password" type="text" placeholder="Password"><br><br>'
+                output += '<input name="email" type="text" placeholder="Email"><br><br>'
+                output += '<input name="password" type="text" placeholder="Password"><br><br>'
 
-                                    output += '<input type="submit" value="Submit">'
-                                    output += '</form>'
-                                    output += '</body></html>'
+                output += '<input type="submit" value="Submit">'
+                output += '</form>'
+                output += '</body></html>'
 
-                                    self.wfile.write(bytes(output, "utf-8"))
+                self.wfile.write(bytes(output, "utf-8"))
 
         if len(path_web) == 3:
             path_web_entry = path_web[1]
@@ -273,7 +270,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
 
             try:
                 # alegere_setare.alegere_setare_fct(dictionar_setari["nume_setare"])
-                download_all_settings(dictionar_setari["email"], dictionar_setari["password"]) # aici apelam functia dintr-un script de background_download.py
+                download_all_settings(dictionar_setari["email"], dictionar_setari["password"])  # aici apelam functia dintr-un script de background_download.py
             except Exception as e:
                 print(e)
                 self.send_response(400)
@@ -309,7 +306,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.send_header("Content-type", "text/html")
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
-            
 
 
 httpd = HTTPServer(("", PORT), NucleumHTTP)
