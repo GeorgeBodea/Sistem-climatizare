@@ -2,11 +2,14 @@ import __init__
 import cgi
 import json
 import urllib.parse
+import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
-import sistem_climatizare.setari_utilizator.adauga_setare as adauga_setare
-import sistem_climatizare.setari_utilizator.alegere_setare as alegere_setare
-import sistem_climatizare.setari_utilizator.stergere_setare as stergere_setare
-import sistem_climatizare.setari_utilizator.variables as variables
+
+sys.path.append("../setari_utilizator")
+import adauga_setare
+import alegere_setare
+import stergere_setare
+import variables
 
 PORT = 8088
 

@@ -1,6 +1,7 @@
 import __init__
 import json
 from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, get_data_curenta
+from variables import path_setari_custom_abs, get_data_curenta
 
 
 def adaugare_setare_fct(nume_setare_custom, temperatura_dorita, numar_persoane):
