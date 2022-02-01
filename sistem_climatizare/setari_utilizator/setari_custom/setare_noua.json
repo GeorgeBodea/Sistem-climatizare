@@ -1,7 +1,6 @@
 {
-  "Nume_Setare": "setare_noua",
-  "Numar_Persoane": 3,
-  "Temperatura": 27.3,
   "Data_Creare": "2022-02-01 04:16:28",
-  "Email": "qwerty@qwerty.com"
+  "Numar_Persoane": 3,
+  "Nume_Setare": "setare_noua",
+  "Temperatura": 27.3
 }

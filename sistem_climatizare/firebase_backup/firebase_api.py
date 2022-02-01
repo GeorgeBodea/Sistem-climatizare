@@ -12,7 +12,6 @@ def __load_json_config():
 
 
 firebase = pyrebase.initialize_app(__load_json_config())
-test_email_password = ("qwerty@yahoo.com", "password")
 
 
 def get_user_auth(email, password):
@@ -56,24 +55,31 @@ def create_new_account(email, password):
 
 
 def upload_all_settings(email, password):
+    user, token = get_user_settings_obj(email, password)
+    setari = dict()
     for path in pathlib.Path(path_setari_custom_abs).iterdir():
         if path.is_file():
             with open(path, 'r') as f:
                 setare = json.loads(f.read())
-                upload_setting(email, password, setare=setare)
+                setari[setare["Nume_Setare"]] = setare
+    user.set(setari, token=token)
 
 
 def download_all_settings(email, password):
-    print(get_settings(email, password).val())
+    settings = get_settings(email, password).val()
+    for i in settings:
+        print(settings[i])
+        with open(path_setari_custom_abs + settings[i]["Nume_Setare"] + ".json", 'w') as fisier_setare:
+            json.dump(settings[i], fisier_setare, indent=2)
+            fisier_setare.write('\n')
 
 
 if __name__ == "__main__":
     while True:
         try:
             print("Sync Settings!")
-            # new_email = input("Email: ")
-            # new_password = input("Password: ")
-            new_email,new_password=test_email_password
+            new_email = input("Email: ")
+            new_password = input("Password: ")
             opt = input("Alegeti optiune: Upload sau Download: ")
             if opt == "Upload":
                 upload_all_settings(new_email, new_password)
