@@ -1,7 +1,12 @@
 import json
 import os
-import sistem_climatizare.firebase_backup.firebase_api as firebase_api
-from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs
+import sys
+
+sys.path.append("../firebase_backup")
+import firebase_api
+
+from variables import path_setari_custom_abs
+
 
 
 def stergere_setare_fct(nume_setare_custom, password):

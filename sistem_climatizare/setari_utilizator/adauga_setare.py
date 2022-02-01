@@ -1,6 +1,10 @@
 import json
-import sistem_climatizare.firebase_backup.firebase_api as firebase_api
-from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, get_data_curenta
+import sys
+
+sys.path.append("../firebase_backup")
+import firebase_api
+
+from variables import path_setari_custom_abs, get_data_curenta
 
 
 def adaugare_setare_fct(nume_setare_custom, temperatura_dorita, numar_persoane, email, password):

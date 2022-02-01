@@ -1,5 +1,5 @@
 import pathlib
-from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, path_setari_ram_abs, nume_fisier_ram
+from variables import path_setari_custom_abs, path_setari_ram_abs, nume_fisier_ram
 
 
 def suprascriere_fisier_ram(nume_setare, data=None):

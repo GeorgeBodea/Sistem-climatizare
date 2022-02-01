@@ -1,0 +1,6 @@
+{
+  "python.analysis.extraPaths": [
+    "./sistem_climatizare/setari_utilizator",
+    "./sistem_climatizare/firebase_backup"
+  ]
+}
