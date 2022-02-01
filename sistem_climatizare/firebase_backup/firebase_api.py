@@ -1,5 +1,8 @@
+import __init__
 import json
-import pyrebase  # update requests and requests-toolbelt
+import pyrebase  # update requests and requests-toolbelt or use pip install pyrebase4
+import pathlib
+from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs
 
 
 def __load_json_config():
@@ -52,13 +55,32 @@ def create_new_account(email, password):
     firebase.auth().create_user_with_email_and_password(email=email, password=password)
 
 
+def upload_all_settings(email, password):
+    for path in pathlib.Path(path_setari_custom_abs).iterdir():
+        if path.is_file():
+            with open(path, 'r') as f:
+                setare = json.loads(f.read())
+                upload_setting(email, password, setare=setare)
+
+
+def download_all_settings(email, password):
+    print(get_settings(email, password).val())
+
+
 if __name__ == "__main__":
     while True:
         try:
-            print("Create new user!")
-            new_email = input("Email: ")
-            new_password = input("Password: ")
-            create_new_account(new_email, new_password)
+            print("Sync Settings!")
+            # new_email = input("Email: ")
+            # new_password = input("Password: ")
+            new_email,new_password=test_email_password
+            opt = input("Alegeti optiune: Upload sau Download: ")
+            if opt == "Upload":
+                upload_all_settings(new_email, new_password)
+            elif opt == "Download":
+                download_all_settings(new_email, new_password)
+            else:
+                raise Exception("Invalid option!")
         except Exception as e:
             print(e)
         except KeyboardInterrupt:

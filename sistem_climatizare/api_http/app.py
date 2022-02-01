@@ -1,3 +1,4 @@
+import __init__
 import cgi
 import json
 import urllib.parse
@@ -26,7 +27,6 @@ def parsare_informatii_fisier(continut):
            "<p>Nume setare: " + continut["Nume_Setare"] + "</p>" + \
            "<p>Temperatura dorita: " + str(continut["Temperatura"]) + "</p>" + \
            "<p>Numar persoane: " + str(continut["Numar_Persoane"]) + "</p>" + \
-           "<p>Email creator: " + str(continut["Email"]) + "</p>" + \
            "<p>Data creere: " + continut["Data_Creare"] + "</p>" + \
            "</body></html>"
 
@@ -74,7 +74,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 output += '<form method="POST" enctype="application/x-www-form-urlencoded" action="/stergere_setare">'
 
                 output += '<input name="nume_setare" type="text" placeholder="Nume setare"><br><br>'
-                output += '<input name="password" type="text" placeholder="Password"><br><br>'
 
                 output += '<input type="submit" value="Submit">'
                 output += '</form>'
@@ -117,8 +116,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 output += '<input name="nume_setare" type="text" placeholder="Nume setare"><br><br>'
                 output += '<input name="numar_persoane" type="text" placeholder="Numar persoane"><br><br>'
                 output += '<input name="temperatura" type="text" placeholder="Temperatura"><br><br>'
-                output += '<input name="email" type="text" placeholder="Email"><br><br>'
-                output += '<input name="password" type="text" placeholder="Password"><br><br>'
 
                 output += '<input type="submit" value="Submit">'
                 output += '</form>'
@@ -163,8 +160,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                     nume_setare_custom=dictionar_setari["nume_setare"],
                     temperatura_dorita=dictionar_setari["temperatura"],
                     numar_persoane=dictionar_setari["numar_persoane"],
-                    email=dictionar_setari["email"],
-                    password=dictionar_setari["password"]
                 )
             except Exception as e:
                 print(e)
@@ -191,10 +186,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
             print(str(dictionar_setari))
 
             try:
-                stergere_setare.stergere_setare_fct(
-                    nume_setare_custom=dictionar_setari["nume_setare"],
-                    password=dictionar_setari["password"]
-                )
+                stergere_setare.stergere_setare_fct(nume_setare_custom=dictionar_setari["nume_setare"])
             except Exception as e:
                 print(e)
                 self.send_response(400)

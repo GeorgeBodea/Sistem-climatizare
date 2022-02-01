@@ -1,3 +1,4 @@
+import __init__
 import pathlib
 from variables import path_setari_custom_abs, path_setari_ram_abs, nume_fisier_ram
 
