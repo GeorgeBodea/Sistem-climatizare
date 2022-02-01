@@ -1,3 +1,4 @@
+import __init__
 import pathlib
 from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, path_setari_ram_abs, nume_fisier_ram
 

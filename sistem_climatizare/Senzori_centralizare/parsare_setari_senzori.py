@@ -1,3 +1,4 @@
+import __init__
 import json
 import sistem_climatizare.setari_utilizator.variables as variables
 
