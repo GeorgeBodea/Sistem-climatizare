@@ -42,6 +42,23 @@ def not_found():
 
 class NucleumHTTP(BaseHTTPRequestHandler):
 
+    def _set_headers(self):
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+
+    def _post_headers(self,x):
+        self.send_response(x)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        self.send_header("Access-Control-Allow-Headers", "X-Requested-With")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.send_header("Content-type", "text/html")
+
     def do_GET(self):
         path_web = self.path.split("/")
         # /info/ -> split -> [ [], [info], [] ]?
@@ -49,9 +66,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
         if len(path_web) == 2:
             path_web_entry = path_web[1]
             if path_web_entry == 'fisiere_custom':
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 try:
                     continut_fisier = variables.get_lista_nume_setari()
@@ -82,9 +97,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(output, "utf-8"))
 
             if path_web_entry == 'alegere_setare':
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 output = ""
                 output += '<html><body>'
@@ -248,15 +261,14 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 alegere_setare.alegere_setare_fct(dictionar_setari["nume_setare"])
             except Exception as e:
                 print(e)
-                self.send_response(400)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._post_headers(400)
+                self.end_headers()    
                 return
             else:
-                self.send_response(301)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
-                self.end_headers()
+                self.end_headers()    
+
         elif self.path.endswith('/backup_download'):
             length = int(self.headers.get('content-length'))
             message = self.rfile.read(length)

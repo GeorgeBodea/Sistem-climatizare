@@ -1,0 +1,69 @@
+swagger: '2.0'
+info:
+  description: 'Sistem de climatizare destept ce contine senzori care detecteaza cand intra/iese cineva din incapere, detecteaza temperatura camerei, dar are si niste tool-uri pentru a-l ajuta pe utilizator sa-si creeze setarile ideale.'
+  version: 1.0.0
+  title: Sistem Climatizare
+  contact:
+    url: https://github.com/GeorgeBodea/Sistem-climatizare
+host: localhost:8088
+tags:
+  - name: App
+    description: Cu ajutorul App-ului utilizatorul isi poate customiza seturile de setari.
+schemes:
+  - http
+paths:
+  /fisiere_custom:
+    get:
+      tags:
+        - App
+      summary: Afiseaza toate titlurile seturilor de setari.
+      description: ""
+      operationId: get_lista_nume_setari()
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: "<html><body><h1> Informatii setari </h1><p>'setari_default';</p>"
+      deprecated: false
+  /alegere_setare:
+    get:
+      tags:
+        - App
+      summary: Alegerea unei setari active.
+      description: Afiseaza toate titlurile seturilor de setari si deschide un formular cu ajutorul caruia utilizatorul isi poate alege setarea activa.
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: "<html><body><h1> Alegere setare </h1><br><p> ['setari_default']</p><form method='POST' enctype='application/x-www-form-urlencoded' action='/alegere_setare'><input name='nume_setare' type='text' placeholder='Nume setare'><br><br><input type='submit' value='Submit'></form></body></html>"
+      deprecated: false
+    post:
+      tags: 
+        - App
+      summary: Se aplica setarea selectata
+      description: Se aplica setarea selectata, sau, daca numele selectat nu se afla in lista de valori, se pastreaza cel curent si se arunca o eroare 400.
+      operationId: alegere_setare()
+      consumes: 
+        - application/x-www-form-urlencoded
+      produces:
+        - application/x-www-form-urlencoded
+      parameters:
+      - name: nume_setare
+        in: formData
+        required: true
+        type: string
+      responses:
+        '301':
+          description: successful operation
+        '400':
+          description: bad request
