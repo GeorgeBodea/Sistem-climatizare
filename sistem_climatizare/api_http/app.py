@@ -48,7 +48,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
     def do_GET(self):
         path_web = self.path.split("/")
         # /info/ -> split -> [ [], [info], [] ]?
-        print(path_web)
 
         if len(path_web) == 2:
             path_web_entry = path_web[1]
@@ -197,7 +196,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 dictionar_setari[cheie] = urllib.parse.unquote(valoare)
 
             try:
-                print(dictionar_setari)
                 adauga_setare.adaugare_setare_fct(
                     nume_setare_custom=dictionar_setari["nume_setare"],
                     temperatura_dorita=dictionar_setari["temperatura"],
@@ -225,8 +223,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 cheie, valoare = element.split('=')
                 dictionar_setari[cheie] = urllib.parse.unquote(valoare)
 
-            print(str(dictionar_setari))
-
             try:
                 stergere_setare.stergere_setare_fct(nume_setare_custom=dictionar_setari["nume_setare"])
             except Exception as e:
@@ -250,8 +246,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
             for element in message:
                 cheie, valoare = element.split('=')
                 dictionar_setari[cheie] = urllib.parse.unquote(valoare)
-
-            print(str(dictionar_setari))
 
             try:
                 alegere_setare.alegere_setare_fct(dictionar_setari["nume_setare"])
@@ -277,8 +271,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 cheie, valoare = element.split('=')
                 dictionar_setari[cheie] = urllib.parse.unquote(valoare)
 
-            print(str(dictionar_setari))
-
             try:
                 # alegere_setare.alegere_setare_fct(dictionar_setari["nume_setare"])
                 download_all_settings(dictionar_setari["email"], dictionar_setari["password"]) # aici apelam functia dintr-un script de background_download.py
@@ -303,8 +295,6 @@ class NucleumHTTP(BaseHTTPRequestHandler):
             for element in message:
                 cheie, valoare = element.split('=')
                 dictionar_setari[cheie] = urllib.parse.unquote(valoare)
-
-            print(str(dictionar_setari))
 
             try:
                 upload_all_settings(dictionar_setari["email"], dictionar_setari["password"])
