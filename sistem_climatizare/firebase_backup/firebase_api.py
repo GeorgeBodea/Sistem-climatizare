@@ -23,7 +23,7 @@ def get_user_settings_obj(email, password):
     return firebase.database().child("users").child(user["localId"]), user["idToken"]
 
 
-def backup_setting(email, password, setare):
+def upload_setting(email, password, setare):
     user, token = get_user_settings_obj(email, password)
     user.child(setare["Nume_Setare"]).set(token=token, data=setare)
 
