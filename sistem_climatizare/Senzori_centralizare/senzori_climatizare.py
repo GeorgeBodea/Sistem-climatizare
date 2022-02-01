@@ -49,19 +49,24 @@ class HumanSensor:
                         self.setari["Numar_Persoane"] = co_persoane
                         parsare_setari_senzori.scriere_setare(self.setari)
 
-        while True:
-            self.subscriber_int.loop_start()
-            self.subscriber_int.subscribe(self.sensor_int.topic)
-            self.subscriber_int.on_message = monitor_aux
-            self.subscriber_int.loop_stop()
+        try:
+            while True:
+                self.subscriber_int.loop_start()
+                self.subscriber_int.subscribe(self.sensor_int.topic)
+                self.subscriber_int.on_message = monitor_aux
+                self.subscriber_int.loop_stop()
 
-            self.subscriber_ext.loop_start()
-            self.subscriber_ext.subscribe(self.sensor_ext.topic)
-            self.subscriber_ext.on_message = monitor_aux
-            self.subscriber_ext.loop_stop()
+                self.subscriber_ext.loop_start()
+                self.subscriber_ext.subscribe(self.sensor_ext.topic)
+                self.subscriber_ext.on_message = monitor_aux
+                self.subscriber_ext.loop_stop()
 
-            change_power()
-            time.sleep(1)
+                change_power()
+                time.sleep(1)
+        except KeyboardInterrupt:
+            self.sensor_int.stop()
+            self.sensor_ext.stop()
+            print("Good Bye!")
 
 
 if __name__ == "__main__":
