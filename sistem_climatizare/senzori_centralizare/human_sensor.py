@@ -47,7 +47,7 @@ class HumanSensor:
 
                 if abs(time_sensor_int - time_sensor_ext) < 3.0 and time_sensor_int != time_sensor_ext:
                     self.sensor_times = dict()
-                    co_persoane = self.setari["Numar_Persoane"]
+                    co_persoane = int(self.setari["Numar_Persoane"])
 
                     if time_sensor_ext < time_sensor_int:
                         print("Un om a intrat")
