@@ -1,11 +1,12 @@
+import __init__
 from input_output_helper import get_display_output, set_keyboard_input
 import pytest
 import pathlib
 import runpy
-import sys
-sys.path.append('../setari_utilizator')
-import adauga_setare, alegere_setare, stergere_setare
-from variables import path_setari_custom_abs, get_data_curenta, path_setari_ram_abs, nume_fisier_ram
+import sistem_climatizare.setari_utilizator.adauga_setare as adauga_setare
+import sistem_climatizare.setari_utilizator.alegere_setare as  alegere_setare
+import sistem_climatizare.setari_utilizator.stergere_setare as stergere_setare
+from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, get_data_curenta, path_setari_ram_abs, nume_fisier_ram
 import json
 import os
 
@@ -38,7 +39,7 @@ def test_adaugare_setare_fct(nume_setare, temperatura, numar_persoane):
 
 
 def setarea_nu_exista(setare):
-    setari = os.listdir ('../setari_utilizator/setari_custom')
+    setari = os.listdir ('../../setari_utilizator/setari_custom')
 
     for json_name in setari:
         print(json_name + ' si ' + json_name[:-5])
