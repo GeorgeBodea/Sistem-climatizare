@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   description: 'Sistem de climatizare destept ce contine senzori care detecteaza cand intra/iese cineva din incapere, detecteaza temperatura camerei, dar are si niste tool-uri pentru a-l ajuta pe utilizator sa-si creeze setarile ideale, care se pot si salva pe cloud.'
-  version: 1.0.0
+  version: 1.0.1
   title: Sistem Climatizare
   contact:
     url: https://github.com/GeorgeBodea/Sistem-climatizare
@@ -29,6 +29,29 @@ paths:
           schema:
             type: string
             example: "<html><body><h1> Informatii setari </h1><p>'setari_default';</p>"
+      deprecated: false
+  /fisiere_custom/{nume_fisier}:
+    get:
+      tags:
+        - App
+      summary: Afiseaza detaliile unei anumite setari.
+      description: Functia afiseaza detaliile unei anumite setari, sau mesajul "Informatiile cerute nu exista" in cazul in care numele introdus nu face parte din lista de setari
+      operationId: get_detalii_setare()
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      parameters:
+      - name: nume_fisier
+        in: path
+        required: true
+        type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: "<html><body><h1> Informatii setare</h1><p>Nume setare: setare_matei_test1</p><p>Temperatura dorita: 12</p><p>Numar persoane: 12</p><p>Data creere: 2022-02-02 01:15:15</p></body></html>"
       deprecated: false
   /alegere_setare:
     get:

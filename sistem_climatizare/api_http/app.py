@@ -171,9 +171,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
             path_web_nume_fisier = path_web[2]
 
             if path_web_entry == 'fisiere_custom':
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 try:
                     continut_fisier = extrage_fisier(path_web_nume_fisier)
