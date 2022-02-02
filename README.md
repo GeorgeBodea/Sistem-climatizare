@@ -14,6 +14,7 @@
       <ul>
         <li><a href="#prerequirements">Pre-requirements</a></li>
         <li><a href="#rulare">Rulare</a></li>
+        <li><a href="#explicatii">Explicatii software</a></li>
       </ul>
     </li>
     <li><a href="#echipa">Echipa de dezvoltare</a></li>
@@ -62,6 +63,7 @@ __Note:__
 2. Setarea standard Default se va afla intodeauna in aplicatie si nu poate fi sters.
 3. Emailul si parola pentru autentificare backup_upload si backup_download: qwerty@qwerty.com (Emailul) si qwerty (Parola).
 4. In cazul in care, accesarea URL-urilor nu se face corect (nu se introduce numele unei setari existente, se incearca un alt URL care nu este specificat mai sus, se greseste emailul si/sau parola, etc.) se va afisa o pagina de eroare (codificari precum: ERR_EMPTY_RESPONSE sau HTTP ERROR 400)
+5. Setarea Default nu se poate sterge.
  
  ### <a id="prerequirements">Pre-requirements</a>
  * Pyhton versiunea 3.10
@@ -79,7 +81,16 @@ __Note:__
  
  Se ruleaza toate scripturile de Python (inafara de cele din folderul __sistem_climatizare/setari_utilizator__ care se ruleaza la cerere din __app.py__) si __Eclipse    Mosquitto__. (Pentru observarea functionalitatilor legate de MQTT)
  
+ ## <a id="explicatii">Explicatii</a>
+ Sistemul de climatizare va avea in realitate un ecran atasat care va afisa temperatura transmisa de senzorul de temperatura (temperatura din camera, nu temperatura data de sistemul de incalzire al aparatului). Sistemul de incalzire al aparatului se va auto-regla in functie de senzorii de intrare/iesire. 
  
+ Altfel spus, daca un numar de persoane intra in camera, camera se va incalzi mai lent pana la temperatura aleasa din fisierul de setare din RAM (__sistem_climatizare/setari_utilizator/ram/fisier_ram.json__), sau invers, daca ies persoane din camera, sa va incalzi mai repede (mai multe persoane inseamna mai multa caldura in camera, si invers). 
+ 
+ Fisierul din RAM va exista intodeauna, precum si fisierul de setare Default. Fisierul din RAM este defapt o singura setare care se modifica in timp real (de aici si numele RAM) din multele setari din folderul __setari_custom__ (de exemplu, daca iese o persoana, se scade numarul de la parametrul Numar_Persoane din fisierul __setari_utilizator/fisier_ram.json__), iar sistemul de caldura real controlat de fisierul __hardware.py__ va incalzi camera in functie de numarul de persoane din camera. Daca utilizatorul inchide aparatul si il redeschide mai tarziu, fisierul RAM va ramane in aceeasi stare ca atunci cand a fost inchis.
+ 
+ Daca utilizatorul doreste sa aleaga alta setare, se va apela de pe pagina web, ruta .../alegere_setare care va incarca in fisierul RAM, o alta setare din cele din folderul __setari_custom__. 
+ 
+  
  ## <a id="echipa">Echipa de dezvoltare</a>
  * Barbu Iulia
  * Bodea George
