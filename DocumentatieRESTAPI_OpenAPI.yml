@@ -63,6 +63,180 @@ paths:
         required: true
         type: string
       responses:
+        '200':
+          description: succefully uploaded and returned to '/fisiere_custom'
+        '301':
+          description: successful operation
+        '400':
+          description: bad request
+  /stergere_setare:
+    get:
+      tags:
+        - App
+      summary: Stergerea unei setari.
+      description: Afiseaza toate titlurile seturilor de setari si deschide un formular cu ajutorul caruia utilizatorul isi poate alege stergerea unei setari.
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: "<html><body><h1> Stergere setare </h1><br><p> ['setari_default']</p><form method='POST' enctype='application/x-www-form-urlencoded' action='/alegere_setare'><input name='nume_setare' type='text' placeholder='Nume setare'><br><br><input type='submit' value='Submit'></form></body></html>"
+      deprecated: false
+    post:
+      tags: 
+        - App
+      summary: Se aplica setarea selectata pentru stergere
+      description: Se aplica setarea selectata, sau, daca numele selectat nu se afla in lista de valori, arunca o eroare 400.
+      operationId: stergere_setare()
+      consumes: 
+        - application/x-www-form-urlencoded
+      produces:
+        - application/x-www-form-urlencoded
+      parameters:
+      - name: nume_setare
+        in: formData
+        required: true
+        type: string
+      responses:
+        '200':
+          description: succefully uploaded and returned to '/fisiere_custom'
+        '301':
+          description: successful operation
+        '400':
+          description: bad request
+  /adaugare_setare:
+    get:
+      tags:
+        - App
+      summary: Adaugarea unei setari.
+      description: Deschide o fereastra cu un formular ce contine numele setarii, numarul de persone si temperatura care are ca scop adaugarea unui set de setari.
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: <html><body><h1> Adauga setare noua</h1><form method="POST" enctype="application/x-www-form-urlencoded" action="/adaugare_setare"><input name="nume_setare" type="text" placeholder="Nume setare"><br><br><input name="numar_persoane" type="text" placeholder="Numar persoane"><br><br><input name="temperatura" type="text" placeholder="Temperatura"><br><br><input type="submit" value="Submit"></form></body></html>
+      deprecated: false
+    post:
+      tags: 
+        - App
+      summary: Se creeaza o setare noua
+      description: Formularul completat se transforma intr-un set de setari.
+      operationId: adaugare_setare()
+      consumes: 
+        - application/x-www-form-urlencoded
+      produces:
+        - application/x-www-form-urlencoded
+      parameters:
+      - name: nume_setare
+        in: formData
+        required: true
+        type: string
+      - name: numar_persoane
+        in: formData
+        required: True
+        type: integer
+      - name: temperatura
+        in: formData
+        required: True
+        type: integer
+      responses:
+        '200':
+          description: succefully uploaded and returned to '/fisiere_custom'
+        '301':
+          description: successful operation
+        '400':
+          description: bad request
+  /backup_upload:
+    get:
+      tags:
+        - App
+      summary: Back-up-ul seturilor de setari.
+      description: Deschide o fereastra cu un formular in care se cer email-ul si parola necesare pentru a transporta setul salvat de setari in cloud.
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: <html><body><h1> Autentificati-va pentru a face upload la backup </h1><form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_upload"><input name="email" type="text" placeholder="Email"><br><br><input name="password" type="text" placeholder="Password"><br><br><input type="submit" value="Submit"></form></body></html>
+      deprecated: false
+    post:
+      tags: 
+        - App
+      summary: Back-up-ul seturilor de setari.
+      description: Dupa conpletarea corecta a autentificarii, se face transferul de date spre cloud, altfel, se arunca o eroare 400.
+      operationId: backup_upload()
+      consumes: 
+        - application/x-www-form-urlencoded
+      produces:
+        - application/x-www-form-urlencoded
+      parameters:
+      - name: email
+        in: formData
+        required: true
+        type: string
+      - name: password
+        in: formData
+        required: true
+        type: string
+      responses:
+        '200':
+          description: succefully uploaded and returned to '/fisiere_custom'
+        '301':
+          description: successful operation
+        '400':
+          description: bad request
+  /backup_download:
+    get:
+      tags:
+        - App
+      summary: Metoda pentru a download-a setul de setari de pe cloud.
+      description: Deschide o fereastra cu un formular in care se cer email-ul si parola necesare pentru a download-a set-ul de setari salvat in cloud.
+      consumes: 
+        - application/json
+      produces:
+        - text/html
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: string
+            example: <html><body><h1> Autentificati-va pentru a face download la backup </h1><form method="POST" enctype="application/x-www-form-urlencoded" action="/backup_upload"><input name="email" type="text" placeholder="Email"><br><br><input name="password" type="text" placeholder="Password"><br><br><input type="submit" value="Submit"></form></body></html>
+      deprecated: false
+    post:
+      tags: 
+        - App
+      summary: Back-up-ul seturilor de setari.
+      description: Dupa conpletarea corecta a autentificarii, se downlaod-eaza datele de pe cloud, altfel, se arunca o eroare 400.
+      operationId: backup_download()
+      consumes: 
+        - application/x-www-form-urlencoded
+      produces:
+        - application/x-www-form-urlencoded
+      parameters:
+      - name: email
+        in: formData
+        required: true
+        type: string
+      - name: password
+        in: formData
+        required: true
+        type: string
+      responses:
+        '200':
+          description: succefully uploaded and returned to '/fisiere_custom'
         '301':
           description: successful operation
         '400':

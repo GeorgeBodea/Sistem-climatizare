@@ -76,9 +76,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 else:
                     self.wfile.write(bytes(parsare_informatii_setari(continut_fisier), "utf-8"))
             if path_web_entry == 'stergere_setare':
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 output = ""
                 output += '<html><body>'
@@ -116,9 +114,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.wfile.write(bytes(output, "utf-8"))
 
             if path_web_entry == 'adaugare_setare':
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 output = ""
                 output += '<html><body>'
@@ -136,9 +132,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
 
                 self.wfile.write(bytes(output, "utf-8"))
             if path_web_entry == "backup_upload":
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 output = ""
                 output += '<html><body>'
@@ -155,9 +149,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
 
                 self.wfile.write(bytes(output, "utf-8"))
             if path_web_entry == "backup_download":
-                self.send_response(200)
-                self.send_header("Content-type", "text/html")
-                self.end_headers()
+                self._set_headers()
 
                 output = ""
                 output += '<html><body>'
@@ -213,13 +205,11 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 )
             except Exception as e:
                 print(e)
-                self.send_response(400)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(400)
                 self.end_headers()
                 return
             else:
-                self.send_response(301)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
         elif self.path.endswith('/stergere_setare'):
@@ -237,13 +227,11 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 stergere_setare.stergere_setare_fct(nume_setare_custom=dictionar_setari["nume_setare"])
             except Exception as e:
                 print(e)
-                self.send_response(400)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(400)
                 self.end_headers()
                 return
             else:
-                self.send_response(301)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
         elif self.path.endswith('/alegere_setare'):
@@ -285,13 +273,11 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 download_all_settings(dictionar_setari["email"], dictionar_setari["password"])  # aici apelam functia dintr-un script de background_download.py
             except Exception as e:
                 print(e)
-                self.send_response(400)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(400)
                 self.end_headers()
                 return
             else:
-                self.send_response(301)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
         elif self.path.endswith('/backup_upload'):
@@ -309,13 +295,11 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 upload_all_settings(dictionar_setari["email"], dictionar_setari["password"])
             except Exception as e:
                 print(e)
-                self.send_response(400)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(400)
                 self.end_headers()
                 return
             else:
-                self.send_response(301)
-                self.send_header("Content-type", "text/html")
+                self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
                 self.end_headers()
 
