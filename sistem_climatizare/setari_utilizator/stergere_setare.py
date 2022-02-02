@@ -8,7 +8,7 @@ def stergere_setare_fct(nume_setare_custom):
     nume_fisier_setare = path_setare + ".json"
 
     if os.path.exists(nume_fisier_setare):
-        if nume_setare_custom == "setari_default":
+        if nume_setare_custom == "Default":
             raise Exception("Setarea default nu se sterge")
 
         os.remove(nume_fisier_setare)
