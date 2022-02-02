@@ -1,3 +1,5 @@
+import os
+
 import __init__
 import pytest
 import sistem_climatizare.firebase_backup.firebase_api as firebase_api
@@ -33,3 +35,28 @@ def test_sync_settings():
             test_passed = True
             break
     assert test_passed
+
+
+def test_delete_setting_no_key(nume_setare="setare_inexistenta"):
+    def exista_setarea(email, password, nume_setare):
+        user, token = firebase_api.get_user_settings_obj(email, password)
+
+        settings = firebase_api.get_settings(email, password).val()
+        for i in settings:
+            if settings[i]['Nume_Setare'] == nume_setare:
+                return True
+        return False
+
+    def json_setare_nu_exista(setare):
+        setari = os.listdir('../../setari_utilizator/setari_custom')
+
+        for json_name in setari:
+            print(json_name + ' si ' + json_name[:-5])
+            if json_name[:-5] == setare:
+                return False
+
+        return True
+
+    firebase_api.delete_setting_no_key(email, password, nume_setare)
+
+    assert (not exista_setarea(email, password, nume_setare)) and json_setare_nu_exista(nume_setare)
