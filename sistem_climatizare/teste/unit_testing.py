@@ -69,8 +69,6 @@ def test_alegere_setare(setare_aleasa):
 
 def test_stergere_setare_fct(setare_de_sters):
     # exemplu apelare: pytest -s teste_setari.py --setare_aleasa setare_inexistenta
-    # daca arunca exceptia, inseamna ca setarea aleasa nu exista (verific asta)
-    # altfel, testarea pe care am ales-o exista, verific ca s-a suprascris corect fisierul ram
     
     try:
         nu_exista = setarea_nu_exista(setare_de_sters)
