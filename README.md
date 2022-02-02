@@ -1,7 +1,7 @@
 # Sistem Climatizare Inteligent
 
 <details>
-  <summary>Table of Contents</summary>
+  <summary>Cuprins</summary>
   <ol>
     <li>
       <a href="#descriere">Descriere</a>
