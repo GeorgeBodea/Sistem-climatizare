@@ -1,6 +1,6 @@
 import __init__
 import time
-from basic_sensor import BasicSensor
+from sistem_climatizare.senzori_centralizare.basic_sensor import BasicSensor
 import threading
 import random
 
