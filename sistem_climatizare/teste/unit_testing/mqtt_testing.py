@@ -1,17 +1,7 @@
 import __init__
+import pytest
 import unittest
 import paho.mqtt.client as mqtt
-from sistem_climatizare.teste.input_output_helper import get_display_output, set_keyboard_input
-import pytest
-import pathlib
-import runpy
-import sistem_climatizare.hardware as hardware
-from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, get_data_curenta, path_setari_ram_abs, nume_fisier_ram
-from sistem_climatizare.senzori_centralizare import temperature_sensor
-from sistem_climatizare.senzori_centralizare import basic_sensor
-import sistem_climatizare.setari_utilizator.json_parser as json_parser
-import json
-import os
 import time
 
 

@@ -1,4 +1,5 @@
 import __init__
+import pytest
 import threading
 import time
 import paho.mqtt.client as mqtt_client
