@@ -304,13 +304,14 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.end_headers()
 
 
-httpd = HTTPServer(("", PORT), NucleumHTTP)
-try:
-    print("Server now running...")
-    httpd.serve_forever()
-except Exception as e:
-    print(e)
-except KeyboardInterrupt:
-    print("Good Bye!")
-finally:
-    httpd.server_close()
+if __name__ == "__main__":    
+    httpd = HTTPServer(("", PORT), NucleumHTTP)
+    try:
+        print("Server now running...")
+        httpd.serve_forever()
+    except Exception as e:
+        print(e)
+    except KeyboardInterrupt:
+        print("Good Bye!")
+    finally:
+        httpd.server_close()
