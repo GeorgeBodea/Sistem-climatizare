@@ -9,11 +9,11 @@ def stergere_setare_fct(nume_setare_custom):
 
     if os.path.exists(nume_fisier_setare):
         if nume_setare_custom == "Default":
-            raise Exception("Setarea default nu se sterge")
+            raise ValueError("Setarea default nu se sterge")
 
         os.remove(nume_fisier_setare)
     else:
-        raise Exception("Setarea nu exista!")
+        raise FileNotFoundError("Setarea nu exista!")
 
 
 if __name__ == "__main__":

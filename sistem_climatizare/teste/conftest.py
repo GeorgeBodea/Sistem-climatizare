@@ -3,10 +3,11 @@ import pytest
 
 # @pytest.fixture
 def pytest_addoption(parser):
-    parser.addoption("--nume_setare", action="store", default="default name")
+    parser.addoption("--nume_setare", action="store", default="Default")
     parser.addoption("--temperatura", action="store", default="0")
     parser.addoption("--numar_persoane", action="store", default="0")
-    parser.addoption("--setare_aleasa", action="store", default="setare1")
+    parser.addoption("--setare_aleasa", action="store", default="Default")
+    parser.addoption("--setare_de_sters", action="store", default="Default")
 
 
 def pytest_generate_tests(metafunc):
@@ -16,6 +17,7 @@ def pytest_generate_tests(metafunc):
     option_value2 = metafunc.config.option.temperatura
     option_value3 = metafunc.config.option.numar_persoane
     option_value4 = metafunc.config.option.setare_aleasa
+    option_value5 = metafunc.config.option.setare_de_sters
 
     if 'nume_setare' in metafunc.fixturenames and option_value1 is not None:
         metafunc.parametrize("nume_setare", [option_value1])
@@ -28,3 +30,6 @@ def pytest_generate_tests(metafunc):
 
     if 'setare_aleasa' in metafunc.fixturenames and option_value4 is not None:
         metafunc.parametrize("setare_aleasa", [option_value4])
+
+    if 'setare_de_sters' in metafunc.fixturenames and option_value5 is not None:
+        metafunc.parametrize("setare_de_sters", [option_value5])
