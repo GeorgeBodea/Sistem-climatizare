@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  description: 'Sistem de climatizare destept ce contine senzori care detecteaza cand intra/iese cineva din incapere, detecteaza temperatura camerei, dar are si niste tool-uri pentru a-l ajuta pe utilizator sa-si creeze setarile ideale.'
+  description: 'Sistem de climatizare destept ce contine senzori care detecteaza cand intra/iese cineva din incapere, detecteaza temperatura camerei, dar are si niste tool-uri pentru a-l ajuta pe utilizator sa-si creeze setarile ideale, care se pot si salva pe cloud.'
   version: 1.0.0
   title: Sistem Climatizare
   contact:
