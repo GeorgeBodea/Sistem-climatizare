@@ -1,6 +1,5 @@
-import os
-
 import __init__
+import os
 import json
 import pyrebase  # update requests and requests-toolbelt or use pip install pyrebase4
 import pathlib
@@ -74,26 +73,3 @@ def download_all_settings(email, password):
         with open(path_setari_custom_abs + settings[i]["Nume_Setare"] + ".json", 'w') as fisier_setare:
             json.dump(settings[i], fisier_setare, indent=2)
             fisier_setare.write('\n')
-
-
-if __name__ == "__main__":
-    while True:
-        try:
-            print("Sync Settings!")
-            new_email = input("Email: ")
-            new_password = input("Password: ")
-            opt = input("Alegeti optiune: Upload sau Download: ")
-            if opt == "Upload":
-                upload_all_settings(new_email, new_password)
-            elif opt == "Download":
-                download_all_settings(new_email, new_password)
-            else:
-                raise Exception("Invalid option!")
-        except Exception as e:
-            print(e)
-        except KeyboardInterrupt:
-            print("Cancelled!")
-            break
-        else:
-            print("Succes!")
-            break
