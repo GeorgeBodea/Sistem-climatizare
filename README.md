@@ -77,9 +77,10 @@ __Note:__
  ### <a id="rulare">Rulare</a>
  Aceasta categorie este pentru observarea functionalitatii scripturilor din aplicatie. O aplicatie reala (cu hardware propiu zis o sa ruleze toate scripturile din aplicatie si eventual, la cerere, adica din folderul __sistem_climatizare/setari_utilizator__) va utiliza componente hardware, reale precum: display (ecran pentru afisare temperatura, echivalent in aplicatie cu fisierul __display.py__), senzor_temperatura (echivalent software __senzor_temperatura.py__), circuite si placa de baza (echivalent software __hardware.py__) si senzori de intrare/iesire la usa (echivalent software __sistem_climatizare/senzori_centralizare__).
  
- Se ruleaza __app.py__ din folderul __sistem_climatizare/api_http__ cu Python. (Pentru observarea functionalitatilor legate de REST API)
+ __Pe scurt__:
+ * Se ruleaza __app.py__ din folderul __sistem_climatizare/api_http__ cu Python. (Pentru observarea functionalitatilor legate de REST API)
  
- Se ruleaza toate scripturile de Python (inafara de cele din folderul __sistem_climatizare/setari_utilizator__ care se ruleaza la cerere din __app.py__) si __Eclipse    Mosquitto__. (Pentru observarea functionalitatilor legate de MQTT)
+ * Se ruleaza toate scripturile de Python (inafara de cele din folderul __sistem_climatizare/setari_utilizator__ care se ruleaza la cerere din __app.py__) si __Eclipse    Mosquitto__. (Pentru observarea functionalitatilor legate de MQTT)
  
  ## <a id="explicatii">Explicatii</a>
  Sistemul de climatizare va avea in realitate un ecran atasat care va afisa temperatura transmisa de senzorul de temperatura (temperatura din camera, nu temperatura data de sistemul de incalzire al aparatului). Sistemul de incalzire al aparatului se va auto-regla in functie de senzorii de intrare/iesire. 
