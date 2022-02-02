@@ -30,6 +30,9 @@ Clientii care au camere mari/de interes profesional (sali de conferinta, sali de
 - Interfata aplicatiei va face un back-up al setarilor prin autentificare pentru urcare fisiere in Cloud Google.
 - Seturile de setari cuprind temperatura dorita, numarul de persoane setat, o denumire si data la care a fost creat.
 
+## Cerinte nereusite
+- Sa modificam temperatura in functie de dimensiunea camerei
+- Sa adaugam o interfata grafica ce se poate accesa din display.
 
 ## Prioritizarea cerintelor dupa optiunile sistemului
 
