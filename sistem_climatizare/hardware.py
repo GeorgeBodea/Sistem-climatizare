@@ -5,7 +5,7 @@ from sistem_climatizare.senzori_centralizare.basic_sensor import BasicSensor
 from sistem_climatizare.senzori_centralizare.human_sensor import HumanSensor
 import sistem_climatizare.setari_utilizator.json_parser as json_parser
 
-temperatura_dorita = json_parser.json_read()["Temperatura"]
+temperatura_dorita = float(json_parser.json_read()["Temperatura"])
 nr_humans = None
 
 

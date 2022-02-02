@@ -4,17 +4,20 @@ from sistem_climatizare.setari_utilizator.variables import path_setari_custom_ab
 
 
 def adaugare_setare_fct(nume_setare_custom, temperatura_dorita, numar_persoane):
-    nume_fisier = path_setari_custom_abs + nume_setare_custom
+    if nume_setare_custom == "Default":
+        raise ValueError
+    else:
+        nume_fisier = path_setari_custom_abs + nume_setare_custom
 
-    setari = dict()
-    setari["Nume_Setare"] = nume_setare_custom
-    setari["Numar_Persoane"] = numar_persoane
-    setari["Temperatura"] = temperatura_dorita
-    setari["Data_Creare"] = get_data_curenta()
+        setari = dict()
+        setari["Nume_Setare"] = nume_setare_custom
+        setari["Numar_Persoane"] = numar_persoane
+        setari["Temperatura"] = temperatura_dorita
+        setari["Data_Creare"] = get_data_curenta()
 
-    with open(nume_fisier + ".json", "w") as f:
-        json.dump(setari, f, indent=2)
-        f.write('\n')
+        with open(nume_fisier + ".json", "w") as f:
+            json.dump(setari, f, indent=2)
+            f.write('\n')
 
 
 if __name__ == "__main__":

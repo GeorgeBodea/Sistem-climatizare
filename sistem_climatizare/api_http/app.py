@@ -51,7 +51,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/html")
         self.end_headers()
 
-    def _post_headers(self,x):
+    def _post_headers(self, x):
         self.send_response(x)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Access-Control-Allow-Methods', 'POST, OPTIONS')
@@ -248,12 +248,12 @@ class NucleumHTTP(BaseHTTPRequestHandler):
             except Exception as e:
                 print(e)
                 self._post_headers(400)
-                self.end_headers()    
+                self.end_headers()
                 return
             else:
                 self._post_headers(301)
                 self.send_header("Location", "/fisiere_custom")
-                self.end_headers()    
+                self.end_headers()
 
         elif self.path.endswith('/backup_download'):
             length = int(self.headers.get('content-length'))
@@ -302,7 +302,7 @@ class NucleumHTTP(BaseHTTPRequestHandler):
                 self.end_headers()
 
 
-if __name__ == "__main__":    
+if __name__ == "__main__":
     httpd = HTTPServer(("", PORT), NucleumHTTP)
     try:
         print("Server now running...")

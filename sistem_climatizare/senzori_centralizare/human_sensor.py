@@ -7,16 +7,15 @@ import sistem_climatizare.setari_utilizator.json_parser as json_parser
 from sistem_climatizare.senzori_centralizare.basic_sensor import BasicSensor
 
 
-class HumanSensor:
+class HumanSensor(threading.Thread):
     @staticmethod
     def sensor_loop(self: BasicSensor, min_sleep_time, max_sleep_time):
-        while True:
-            if self.stopped():
-                return
+        while not self.stopped():
             self.publisher.publish(self.topic, time.time())
             time.sleep(random.randint(min_sleep_time, max_sleep_time))
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        super(HumanSensor, self).__init__(*args, **kwargs)
         self.sensor_int = BasicSensor("Inside")
         self.sensor_ext = BasicSensor("Outside")
         self.sensor_int.sensor_loop = self.sensor_loop
@@ -32,6 +31,13 @@ class HumanSensor:
         self.sensor_times = dict()
         self.setari = json_parser.json_read()
         self.lock = threading.Lock()
+        self._stop = threading.Event()
+
+    def stop(self):
+        self._stop.set()
+
+    def stopped(self):
+        return self._stop.is_set()
 
     def loop_monitor(self):
         def monitor_aux(client, user_data, message):
@@ -62,8 +68,8 @@ class HumanSensor:
                     self.setari["Numar_Persoane"] = co_persoane
                     json_parser.json_write(self.setari)
 
-        try:
-            while True:
+        while not self.stopped():
+            try:
                 self.subscriber_int.loop_start()
                 self.subscriber_int.subscribe(self.sensor_int.topic)
                 self.subscriber_int.on_message = monitor_aux
@@ -77,10 +83,11 @@ class HumanSensor:
                 with self.lock:
                     change_power()
                 time.sleep(1)
-        except KeyboardInterrupt:
-            self.sensor_int.stop()
-            self.sensor_ext.stop()
-            print("Good Bye!")
+            except KeyboardInterrupt:
+                break
+        print("Good Bye!")
+        self.sensor_int.stop()
+        self.sensor_ext.stop()
 
 
 if __name__ == "__main__":

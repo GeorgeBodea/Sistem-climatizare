@@ -21,12 +21,10 @@ class BasicSensor(threading.Thread):
         self._stop = threading.Event()
 
     def stop(self):
-        with threading.Lock():
-            self._stop.set()
+        self._stop.set()
 
     def stopped(self):
-        with threading.Lock():
-            return self._stop.is_set()
+        return self._stop.is_set()
 
     def sensor_loop(self, *args, **kwargs):
         pass
