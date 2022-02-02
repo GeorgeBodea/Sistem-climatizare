@@ -80,7 +80,7 @@ __Note:__
  __Pe scurt__:
  * Se ruleaza __app.py__ din folderul __sistem_climatizare/api_http__ cu Python. (Pentru observarea functionalitatilor legate de REST API)
  
- * Se ruleaza toate scripturile de Python (inafara de cele din folderul __sistem_climatizare/setari_utilizator__ care se ruleaza la cerere din __app.py__) si __Eclipse    Mosquitto__. (Pentru observarea functionalitatilor legate de MQTT)
+ * Se ruleaza toate scripturile de Python (inafara de cele din folderul __sistem_climatizare/setari_utilizator__ care se ruleaza la cerere din __app.py__ si fara __sistem_climatizare/teste__ evident) si __Eclipse    Mosquitto__. (Pentru observarea functionalitatilor legate de MQTT)
  
  ## <a id="explicatii">Explicatii</a>
  Sistemul de climatizare va avea in realitate un ecran atasat care va afisa temperatura transmisa de senzorul de temperatura (temperatura din camera, nu temperatura data de sistemul de incalzire al aparatului). Sistemul de incalzire al aparatului se va auto-regla in functie de senzorii de intrare/iesire. 
