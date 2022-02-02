@@ -14,18 +14,3 @@ def stergere_setare_fct(nume_setare_custom):
         os.remove(nume_fisier_setare)
     else:
         raise FileNotFoundError("Setarea nu exista!")
-
-
-if __name__ == "__main__":
-    while True:
-        try:
-            nume_setare = input("Stergeti setarea cu numele: ")
-            stergere_setare_fct(nume_setare)
-        except KeyboardInterrupt:
-            print("Canceled!")
-            break
-        except Exception as e:
-            print(e)
-        else:
-            print("Succes!")
-            break

@@ -34,20 +34,7 @@ def alegere_setare_fct(nume_setare):
     nume_setare = nume_setare.strip()
     initial_count = nr_fisiere()
     if initial_count == 1:
-        suprascriere_fisier_ram("setari_default")
+        suprascriere_fisier_ram("Default")
         print("Se utilizeaza setarile default")
     else:
         suprascriere_fisier_ram(nume_setare)
-
-
-if __name__ == "__main__":
-    nr_fisiere(verbose=True)
-    while True:
-        try:
-            nume_setare_aleasa = input("Alegeti setarea: ")
-            alegere_setare_fct(nume_setare_aleasa)
-        except Exception as e:
-            print(e)
-        else:
-            print("Succes!")
-            break

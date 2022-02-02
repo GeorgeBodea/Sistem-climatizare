@@ -3,12 +3,13 @@ import pytest
 import sistem_climatizare.setari_utilizator.adauga_setare as adauga_setare
 import sistem_climatizare.setari_utilizator.alegere_setare as alegere_setare
 import sistem_climatizare.setari_utilizator.stergere_setare as stergere_setare
+import sistem_climatizare.setari_utilizator.variables as variables
 from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs, path_setari_ram_abs, nume_fisier_ram
 import json
 import os
 
 
-def test_adaugare_setare_fct(nume_setare, temperatura, numar_persoane):
+def my_test_adaugare_setare_fct(nume_setare, temperatura, numar_persoane):
     # exemplu apelare functie: pytest -s teste_setari.py --nume_setare setare1
     nume_fisier = path_setari_custom_abs + nume_setare + '.json'
     json_before = None
@@ -37,8 +38,21 @@ def test_adaugare_setare_fct(nume_setare, temperatura, numar_persoane):
             assert json_before != json_after
 
 
+def test_adaugare_setare_default():
+    my_test_adaugare_setare_fct('Default', 1, 10)
+
+
+def test_adaugare_setare_noua():
+    my_test_adaugare_setare_fct('Qwerty.test', 12, 13)
+
+
+def test_adaugare_setare_existenta():
+    my_test_adaugare_setare_fct('Qwerty.test', 10, 10)
+    my_test_adaugare_setare_fct('Qwerty.test', 13, 14)
+
+
 def setarea_nu_exista(setare):
-    setari = os.listdir('../../setari_utilizator/setari_custom')
+    setari = variables.lista_nume_setari
 
     for json_name in setari:
         print(json_name + ' si ' + json_name[:-5])
@@ -48,7 +62,7 @@ def setarea_nu_exista(setare):
     return True
 
 
-def test_alegere_setare(setare_aleasa):
+def my_test_alegere_setare(setare_aleasa):
     # exemplu apelare: pytest -s teste_setari.py --setare_aleasa setare_inexistenta
     # daca arunca exceptia, inseamna ca setarea aleasa nu exista (verific asta)
     # altfel, testarea pe care am ales-o exista, verific ca s-a suprascris corect fisierul ram
@@ -67,7 +81,15 @@ def test_alegere_setare(setare_aleasa):
         assert data == data2
 
 
-def test_stergere_setare_fct(setare_de_sters):
+def test_alegere_setare_dault():
+    my_test_alegere_setare('Default')
+
+
+def test_alegere_setare_inexistent():
+    my_test_alegere_setare('Inexistent...')
+
+
+def my_test_stergere_setare_fct(setare_de_sters):
     # exemplu apelare: pytest -s teste_setari.py --setare_aleasa setare_inexistenta
     nu_exista = None
     try:
@@ -81,4 +103,27 @@ def test_stergere_setare_fct(setare_de_sters):
         assert setare_de_sters == "Default"
 
     else:
-        assert (not nu_exista) and setarea_nu_exista(setare_de_sters)
+        assert setarea_nu_exista(setare_de_sters)
+
+
+def test_stergere_setare_default():
+    my_test_stergere_setare_fct('Default')
+
+
+def test_stergere_setare_corecta():
+    my_test_stergere_setare_fct('Qwerty.test')
+
+
+def test_stergere_setare_inexistenta():
+    my_test_stergere_setare_fct('Inexistent...')
+
+
+def test_nr_fisiere_alegere_setare():
+    assert len(variables.get_lista_nume_setari()) == alegere_setare.nr_fisiere()
+
+
+def test_suprascriere_fisier_ram():
+    alegere_setare.suprascriere_fisier_ram('Default')
+    with open(path_setari_custom_abs + 'Default.json', 'r') as f1:
+        with open(path_setari_ram_abs + nume_fisier_ram, 'r') as f2:
+            assert f1.read() == f2.read()
