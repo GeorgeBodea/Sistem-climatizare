@@ -1,0 +1,104 @@
+asyncapi: 2.0.0
+info:
+  title: Sistem de climatizare inteligent
+  version: 1.0.0
+  description: "Descrierea parametrilor MQTT din aplicatia sistemului de climatizare."
+servers:
+  production:
+    url: 'localhost'
+    protocol: mqtt
+    description: Eclipse Mosquitto
+defaultContentType: application/json
+channels:
+  'BasicSensor':
+   publish:
+     message:
+        $ref: '#/components/messages/BasicSensor'
+  'BasicSensor/Temperatura':
+   publish:
+     message:
+        $ref: '#/components/messages/Temperatura'
+  'BasicSensor/Inside':
+   publish:
+     message:
+        $ref: '#/components/messages/Inside'
+  'BasicSensor/Outside':
+   publish:
+     message:
+        $ref: '#/components/messages/Inside'
+  'HumanSensor':
+   publish:
+     message:
+        $ref: '#/components/messages/HumanSensor'
+components:
+  messages:
+    BasicSensor:
+      name: BasicSensor
+      title: BasicSensor
+      summary: >-
+        Senzorul central pentru temperatura din camera si detectarea miscarilor de intrare-iesire.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/BasicSensorPayload'
+    Temperatura:
+      name: Temperatura
+      title: Temperatura
+      summary: >-
+        Temperatura din camera transmisa de la termostat.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/TemperaturaPayload'
+    Inside:
+      name: Inside sensor 
+      title: Inside
+      summary: >-
+        Senzorul din interiorul camerei care se activeaza la miscare.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/InsidePayload'
+    Outside:
+      name: Outside sensor 
+      title: Outside
+      summary: >-
+        Senzorul din exteriorul camerei care se activeaza la miscare.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/InsidePayload'
+    HumanSensor:
+      name: Human sensor 
+      title: Human
+      summary: >-
+        Numarul curent de persoane din camera modificat in functie de senzorii de intrare-iesire.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/HumanSensorPayload'
+  schemas:
+    BasicSensorPayload:
+      type: object
+      properties: 
+        Temperatura:
+          $ref: '#/components/schemas/TemperaturaPayload'
+        Inside:
+          $ref: '#/components/schemas/InsidePayload'
+        Outside:
+          $ref: '#/components/schemas/OutsidePayload'
+    TemperaturaPayload:
+      type: number
+      format: float
+      description: Temperatura exprimata in grade Celsius din camera.
+      example: 22.0
+    InsidePayload:
+      type: number
+      format: float
+      description: Senzorul din interiorul camerei.
+      example: 1643758629.103219
+    OutsidePayload:
+      type: number
+      format: float
+      description: Senzorul din exteriorul camerei.
+      example: 1643758631.3459396
+    HumanSensorPayload:
+      type: number
+      format: float
+      description: Numarul de persoane din camera.
+      example: 5
