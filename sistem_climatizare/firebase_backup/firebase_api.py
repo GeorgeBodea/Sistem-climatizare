@@ -1,12 +1,14 @@
+import os
+
 import __init__
 import json
 import pyrebase  # update requests and requests-toolbelt or use pip install pyrebase4
 import pathlib
 from sistem_climatizare.setari_utilizator.variables import path_setari_custom_abs
 
-
 def __load_json_config():
-    with open('../firebase_backup/apiKey.json', 'r') as f:
+
+    with open(os.path.dirname(__file__)+'/apiKey.json', 'r') as f:
         firebase_config = json.loads(f.read())
     return firebase_config
 
