@@ -75,7 +75,7 @@ __Note:__
  
  
  ### <a id="rulare">Rulare</a>
- Aceasta categorie este pentru observarea functionalitatii scripturilor din aplicatie. O aplicatie reala (cu hardware propiu zis o sa ruleze toate scripturile din aplicatie si eventual, la cerere, adica din folderul __sistem_climatizare/setari_utilizator__) va utiliza componente hardware, reale precum: display (ecran pentru afisare temperatura, echivalent in aplicatie cu fisierul __display.py__), senzor_temperatura (echivalent software __senzor_temperatura.py__), circuite si placa de baza (echivalent software __hardware.py__) si senzori de intrare/iesire la usa (echivalent software __sistem_climatizare/senzori_centralizare__).
+ Aceasta categorie este pentru observarea functionalitatii scripturilor din aplicatie. O aplicatie reala (cu hardware propiu zis o sa ruleze toate scripturile din aplicatie si eventual, la cerere, adica din folderul __sistem_climatizare/setari_utilizator__) va utiliza componente hardware, reale precum: display (ecran pentru afisare temperatura, echivalent in aplicatie cu fisierul __display.py__), senzor_temperatura (echivalent software __senzori_centralizare/temperature_sensor.py__), circuite si placa de baza (echivalent software __hardware.py__) si senzori de intrare/iesire la usa (echivalent software __sistem_climatizare/senzori_centralizare__).
  
  __Pe scurt__:
  * Se ruleaza __app.py__ din folderul __sistem_climatizare/api_http__ cu Python. (Pentru observarea functionalitatilor legate de REST API)
